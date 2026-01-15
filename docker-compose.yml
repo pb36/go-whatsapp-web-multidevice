@@ -5,11 +5,15 @@ services:
       options:
         max-size: "200k"
         max-file: "10"
+
     build:
       context: .
       dockerfile: ./docker/golang.Dockerfile
-    restart: "on-failure"
-    ports:
-      - "3000:3000"
-    env_file:
-      - src/.env
+
+    restart: unless-stopped
+
+    # Let Coolify manage networking
+    ports: []
+
+    # Let Coolify manage env vars
+    env_file: []
